@@ -66,16 +66,16 @@
     </build>
 
     <distributionManagement>
-        <snapshotRepository>
-            <id>sumo-snapshots</id>
-            <name>Sumo Snapshots</name>
-            <url>https://nexus.kumoroku.com/nexus/content/repositories/sumo-snapshots/</url>
-        </snapshotRepository>
         <repository>
-            <id>sumo-releases</id>
-            <name>Sumo Snapshots</name>
-            <url>https://nexus.kumoroku.com/nexus/content/repositories/sumo-releases/</url>
-        </repository>
+          <id>accolade-releases</id>
+          <name>accolade-releases</name>
+          <url>https://accolade.artifactoryonline.com/accolade/libs-releases-local</url>
+      </repository>
+      <snapshotRepository>
+          <id>accolade-snapshots</id>
+          <name>snapshots</name>
+          <url>https://accolade.artifactoryonline.com/accolade/libs-snapshots-local</url>
+      </snapshotRepository>
     </distributionManagement>
 
     <dependencies>
