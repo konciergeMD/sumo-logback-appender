@@ -68,7 +68,6 @@ public class SumoBufferFlusher {
                 public Thread newThread(Runnable r) {
                     Thread thread = new Thread(r);
                     thread.setName("SumoBufferFlusherThread");
-                    thread.setDaemon(true);
                     return thread;
                 }
             });
@@ -77,7 +76,6 @@ public class SumoBufferFlusher {
         future =
             executor.
                 scheduleAtFixedRate(flushingTask, 0, flushingAccuracy, TimeUnit.MILLISECONDS);
-
     }
 
 
@@ -87,11 +85,10 @@ public class SumoBufferFlusher {
             future.cancel(false);
             future = null;
         }
+        flushingTask.flushAndSend();
 
         if (executor != null) {
             executor.shutdownNow();
         }
     }
-
-
 }

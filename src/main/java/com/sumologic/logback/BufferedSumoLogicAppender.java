@@ -52,7 +52,7 @@ public class BufferedSumoLogicAppender extends AppenderBase<ILoggingEvent> {
     private int retryInterval = 10000;        // Once a request fails, how often until we retry.
 
     private long messagesPerRequest = 100;    // How many messages need to be in the queue before we flush
-    private long maxFlushInterval = 10000;    // Maximum interval between flushes (ms)
+    private long maxFlushInterval = 3000;    // Maximum interval between flushes (ms)
     private long flushingAccuracy = 250;      // How often the flushed thread looks into the message queue (ms)
     private String sourceName = "sumo-logback-appender"; // Name to stamp for querying with _sourceName
 
@@ -170,12 +170,19 @@ public class BufferedSumoLogicAppender extends AppenderBase<ILoggingEvent> {
 
     @Override
     public void stop() {
+        LogLog.debug("Trying to stop");
         super.stop();
-        sender.close();
-        sender = null;
 
-        flusher.stop();
-        flusher = null;
+        if (flusher != null) {
+            flusher.stop();
+            flusher = null;
+        }
+
+        if (sender != null) {
+            sender.close();
+            sender = null;
+        }
+
     }
 
     // Private bits.
