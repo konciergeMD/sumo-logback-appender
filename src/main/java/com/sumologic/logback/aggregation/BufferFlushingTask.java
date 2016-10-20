@@ -49,7 +49,7 @@ public abstract class BufferFlushingTask<In, Out> implements Runnable {
                (currentTime >= dateOfNextFlush);
     }
 
-    private void flushAndSend() {
+    public void flushAndSend() {
         List<In> messages = new ArrayList<In>(messageQueue.size());
         messageQueue.drainTo(messages);
 
